@@ -1,0 +1,9 @@
+MANAGE=django-admin.py
+PYTHONPATH=$(CURDIR)
+SETTINGS=test_assignment.settings
+
+run:
+	PYTHONPATH=$(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(SETTINGS) $(MANAGE) runserver
+
+syncdb:
+	PYTHONPATH=$(PYTHONPATH) DJANGO_SETTINGS_MODULE=$(SETTINGS) $(MANAGE) syncdb --noinput
