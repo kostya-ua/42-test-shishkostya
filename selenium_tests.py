@@ -21,7 +21,7 @@ class NewVisitorTest(unittest.TestCase):
         self.assertEqual(surname, 'Shish')
 
         bith_date = self.browser.find_element_by_id('bith_date').text
-        self.assertEqual(bith_date, '13 May 1989')
+        self.assertEqual(bith_date, 'May 13, 1989')
 
         email = self.browser.find_element_by_id('email').text
         self.assertEqual(email, 'Email: shish.kostya@gmail.com')
