@@ -33,6 +33,20 @@ class NewVisitorTest(unittest.TestCase):
         skype = self.browser.find_element_by_id('skype').text
         self.assertEqual(skype, 'Skype: kotya___')
 
+    def test_requests_showing(self):
+
+        for i in range(10, 0, -1):
+            self.browser.get('http://localhost:8000/test%d' % i)
+
+        self.browser.get('http://localhost:8000/requests/')
+
+        table = self.browser.find_element_by_id('requests_table')
+        rows = table.find_elements_by_tag_name('tr')
+
+        self.assertIn('/requests/', rows[1].text)
+        self.assertEqual(len(rows), 11)
+
+
 
 if __name__ == '__main__':
     unittest.main()
