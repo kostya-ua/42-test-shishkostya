@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block content %}
+    <h3>Last 10 requests</h3>
     <table id="requests_table">
         {% for request in requests_list %}
             <tr><td>{{ request.path }}</td></tr>
         {% endfor %}
     </table>
-</body>
-</html>
+{% endblock %}

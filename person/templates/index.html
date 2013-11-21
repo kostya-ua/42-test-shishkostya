@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}style.css" />
-</head>
-<body>
-    <div id="main">
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
         <h3>42 Coffee Cups Test Assignment</h3>
         <div class="left">
             <div id="name">{{ person.name }}</div>
@@ -27,7 +23,11 @@
                 <div id="other_contacts">Other contacts: {{ person.other_contacts }}</div>
             {% endif %}
         </div>
+        </div>
 
+        <div style="clear:both;">
+        <hr >
+
+        <a href="/requests/">requests</a>
     </div>
-</body>
-</html>
+{% endblock %}
