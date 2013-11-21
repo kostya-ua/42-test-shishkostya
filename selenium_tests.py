@@ -1,6 +1,7 @@
 from selenium import webdriver
 import unittest
 
+
 class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
@@ -31,7 +32,6 @@ class NewVisitorTest(unittest.TestCase):
 
         skype = self.browser.find_element_by_id('skype').text
         self.assertEqual(skype, 'Skype: kotya___')
-
 
 
 if __name__ == '__main__':

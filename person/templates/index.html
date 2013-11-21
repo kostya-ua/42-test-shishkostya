@@ -11,7 +11,10 @@
             <div id="name">{{ person.name }}</div>
             <div id="surname">{{ person.surname }}</div>
             <div id="bith_date">{{ person.bithdate }}</div>
-            <div id="bio">Bio: {{ person.bio }}</div>
+            <br>
+            {% if person.bio %}
+                <div id="bio">Bio: {{ person.bio }}</div>
+            {% endif %}
         </div>
 
         <div class="right">
@@ -19,7 +22,10 @@
             <div id="email">Email: {{ person.email }}</div>
             <div id="jabber">Jabber: {{ person.jabber }}</div>
             <div id="skype">Skype: {{ person.skype }}</div>
-            <div id="other_contacts">Other contacts: {{ person.other_contacts }}</div>
+            <br>
+            {% if person.other_contacts %}
+                <div id="other_contacts">Other contacts: {{ person.other_contacts }}</div>
+            {% endif %}
         </div>
 
     </div>
