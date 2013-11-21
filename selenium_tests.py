@@ -42,9 +42,9 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('requests_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertEqual(rows[0].text, '/requests/')
-        self.assertTrue(any(row.text == '/test1' for row in rows))
-        self.assertEqual(len(rows), 10)
+
+        self.assertIn('/requests/', rows[1].text)
+        self.assertEqual(len(rows), 11)
 
 
 
