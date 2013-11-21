@@ -99,7 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'requests.middleware.RequestMiddleware',
+    'utils.middleware.RequestMiddleware',
 )
 
 ROOT_URLCONF = 'test_assignment.urls'
@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'person',
-    'requests',
+    'utils',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from person.views import MainPageView
-from requests.views import RequestsView
+from utils.views import RequestsView
 
 
 # Uncomment the next two lines to enable the admin:

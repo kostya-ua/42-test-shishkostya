@@ -1,9 +1,9 @@
 from django.test import TestCase
-from requests.models import Request
-from requests.views import RequestsView
+from utils.models import Request
+from utils.views import RequestsView
 
 
-class RequestsTest(TestCase):
+class UtilsTest(TestCase):
 
     def setUp(self):
         for i in range(11):
