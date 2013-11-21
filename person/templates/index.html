@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}style.css" />
+</head>
+<body>
+    <div id="main">
+        <h3>42 Coffee Cups Test Assignment</h3>
+        <div class="left">
+            <div id="name">{{ person.name }}</div>
+            <div id="surname">{{ person.surname }}</div>
+            <div id="bith_date">{{ person.bithdate }}</div>
+            <br>
+            {% if person.bio %}
+                <div id="bio">Bio: {{ person.bio }}</div>
+            {% endif %}
+        </div>
+
+        <div class="right">
+            <div>Contacts</div>
+            <div id="email">Email: {{ person.email }}</div>
+            <div id="jabber">Jabber: {{ person.jabber }}</div>
+            <div id="skype">Skype: {{ person.skype }}</div>
+            <br>
+            {% if person.other_contacts %}
+                <div id="other_contacts">Other contacts: {{ person.other_contacts }}</div>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+</html>

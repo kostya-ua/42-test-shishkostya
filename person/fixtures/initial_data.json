@@ -1,0 +1,16 @@
+[
+  {
+    "model": "person.person",
+    "pk": 1,
+    "fields": {
+    "name": "Kostyantyn",
+    "surname": "Shish",
+    "bithdate": "1989-05-13",
+    "bio": "",
+    "email": "shish.kostya@gmail.com",
+    "skype": "kotya___",
+    "jabber": "shishkostya@jabber.at",
+    "other_contacts": ""
+    }
+  }
+]
