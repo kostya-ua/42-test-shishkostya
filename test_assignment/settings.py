@@ -157,3 +157,7 @@ LOGGING = {
         },
     }
 }
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'utils.context_processors.add_settings_to_context',
+)

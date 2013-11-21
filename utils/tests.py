@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.conf import settings
 from utils.models import Request
 from utils.views import RequestsView
 
@@ -14,3 +15,8 @@ class UtilsTest(TestCase):
         context = view.get_context_data()
 
         self.assertEqual(len(context['requests_list']), 10)
+
+    def test_context_processor(self):
+        response = self.client.get('/')
+        self.assertIn('SETTINGS', response.context)
+        self.assertEqual(response.context['SETTINGS'], settings)
