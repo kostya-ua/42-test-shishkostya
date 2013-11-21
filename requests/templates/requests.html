@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+    <table id="requests_table">
+        {% for request in requests_list %}
+            <tr><td>{{ request.path }}</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
