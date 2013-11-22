@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from requests.models import Request
+from utils.models import Request
 
 
 class RequestsView(TemplateView):
