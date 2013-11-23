@@ -15,23 +15,17 @@ class NewVisitorTest(unittest.TestCase):
 
         self.browser.get('http://localhost:8000')
 
-        name = self.browser.find_element_by_id('name').text
-        self.assertEqual(name, 'Kostyantyn')
+        left = self.browser.find_element_by_class_name('left').text
 
-        surname = self.browser.find_element_by_id('surname').text
-        self.assertEqual(surname, 'Shish')
+        self.assertIn('Kostyantyn', left)
+        self.assertIn('Shish', left)
+        self.assertIn('May 13, 1989', left)
 
-        bith_date = self.browser.find_element_by_id('bith_date').text
-        self.assertEqual(bith_date, 'May 13, 1989')
+        right = self.browser.find_element_by_class_name('right').text
 
-        email = self.browser.find_element_by_id('email').text
-        self.assertEqual(email, 'Email: shish.kostya@gmail.com')
-
-        jabber = self.browser.find_element_by_id('jabber').text
-        self.assertEqual(jabber, 'Jabber: shishkostya@jabber.at')
-
-        skype = self.browser.find_element_by_id('skype').text
-        self.assertEqual(skype, 'Skype: kotya___')
+        self.assertIn('Email: shish.kostya@gmail.com', right)
+        self.assertIn('Jabber: shishkostya@jabber.at', right)
+        self.assertIn('Skype: kotya___', right)
 
     def test_requests_showing(self):
 
