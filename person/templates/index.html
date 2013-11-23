@@ -4,9 +4,9 @@
     <div>
         <h3>42 Coffee Cups Test Assignment</h3>
         <div class="left">
-            <div id="name">{{ person.name }}</div>
-            <div id="surname">{{ person.surname }}</div>
-            <div id="bith_date">{{ person.bithdate }}</div>
+            <div>{{ person.name }}</div>
+            <div>{{ person.surname }}</div>
+            <div>{{ person.bithdate }}</div>
             <br>
             {% if person.bio %}
                 <div id="bio">Bio: {{ person.bio }}</div>
@@ -15,12 +15,12 @@
 
         <div class="right">
             <div>Contacts</div>
-            <div id="email">Email: {{ person.email }}</div>
-            <div id="jabber">Jabber: {{ person.jabber }}</div>
-            <div id="skype">Skype: {{ person.skype }}</div>
+            <div>Email: {{ person.email }}</div>
+            <div>Jabber: {{ person.jabber }}</div>
+            <div>Skype: {{ person.skype }}</div>
             <br>
             {% if person.other_contacts %}
-                <div id="other_contacts">Other contacts: {{ person.other_contacts }}</div>
+                <div>Other contacts: {{ person.other_contacts }}</div>
             {% endif %}
         </div>
         </div>
