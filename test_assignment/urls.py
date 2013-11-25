@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from person.views import MainPageView
+from person.views import MainPageView, edit
 from utils.views import RequestsView
 
 
@@ -11,6 +11,9 @@ urlpatterns = patterns('',
     # Examples:
      url(r'^$', MainPageView.as_view()),
      url(r'^requests/$', RequestsView.as_view()),
+     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
+     url(r'^edit_home/$', edit),
     # url(r'^test_assignment/', include('test_assignment.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

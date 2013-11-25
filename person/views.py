@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from person.models import Person
 
@@ -9,3 +10,8 @@ class MainPageView(TemplateView):
         context = super(MainPageView, self).get_context_data(**kwargs)
         context["person"] = Person.objects.get(pk=1)
         return context
+
+
+@login_required()
+def edit(request):
+    pass
