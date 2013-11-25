@@ -19,3 +19,9 @@ class PersonTest(TestCase):
         self.assertIn(self.person.surname, response.content)
         self.assertIn(formats.date_format(person.bithdate, "DATE_FORMAT"), response.content)
 
+    def test_save_main_page_data(self):
+        response = self.client.post('/edit_home/', {'name': 'Bill'})
+
+        self.assertEqual(Person.objects.all().count(), 1)
+        new_item = Person.objects.all()[0]
+        self.assertEqual(new_item.name, 'Bill')

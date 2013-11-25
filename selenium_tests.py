@@ -4,6 +4,10 @@ import unittest
 
 TEST_USER = 'admin'
 TEST_PASSWORD = 'admin'
+TEST_DATA = {'name': 'John', 'surname': 'Smith', 'bithdate': '1987-07-02',
+             'bio': 'I was born on 7 July 1987', 'email': 'john@mail.com', 'skype': 'john.smith',
+             'jabber': 'johnsmith', 'other_contacts': 'Phone: 1234567'}
+
 
 
 class NewVisitorTest(unittest.TestCase):
@@ -15,7 +19,7 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_loading_mail_page(self):
+    def test_loading_main_page(self):
 
         self.browser.get('http://localhost:8000')
 
@@ -44,8 +48,7 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('/requests/', rows[1].text)
         self.assertEqual(len(rows), 11)
 
-    def test_authorization(self):
-
+    def authorize(self):
         self.browser.get('http://localhost:8000/logout/')
 
         self.browser.get('http://localhost:8000/edit_home/')
@@ -54,7 +57,36 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.find_element_by_id('id_password').send_keys(TEST_PASSWORD)
         self.browser.find_element_by_xpath("//*[@type='submit']").click()
 
+    def test_authorization(self):
+
+        self.authorize()
         self.assertEqual(self.browser.current_url, 'http://localhost:8000/edit_home/')
+
+    def test_edit_main_page(self):
+
+        self.authorize()
+
+        for key, value in TEST_DATA:
+            self.browser.find_element_by_id('id_%s' % key).send_keys(value)
+
+        self.browser.find_element_by_id('id_surname').send_keys(TEST_PASSWORD)
+        self.browser.find_element_by_xpath("//*[@type='submit']").click()
+
+        self.assertEqual(self.browser.current_url, 'http://localhost:8000/')
+
+        left = self.browser.find_element_by_class_name('left').text
+
+        self.assertIn(TEST_DATA['id_name'], left)
+        self.assertIn(TEST_DATA['id_surname'], left)
+        self.assertIn(TEST_DATA['id_bithdate'], left)
+        self.assertIn(TEST_DATA['id_bio'], left)
+
+        right = self.browser.find_element_by_class_name('right').text
+
+        self.assertIn(TEST_DATA['id_email'], right)
+        self.assertIn(TEST_DATA['id_skype'], right)
+        self.assertIn(TEST_DATA['id_jabber'], right)
+        self.assertIn(TEST_DATA['id_other_contacts'], right)
 
 
 if __name__ == '__main__':
