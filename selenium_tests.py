@@ -2,6 +2,10 @@ from selenium import webdriver
 import unittest
 
 
+TEST_USER = 'admin'
+TEST_PASSWORD = 'admin'
+
+
 class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
@@ -40,6 +44,17 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('/requests/', rows[1].text)
         self.assertEqual(len(rows), 11)
 
+    def test_authorization(self):
+
+        self.browser.get('http://localhost:8000/logout/')
+
+        self.browser.get('http://localhost:8000/edit_home/')
+
+        self.browser.find_element_by_id('id_username').send_keys(TEST_USER)
+        self.browser.find_element_by_id('id_password').send_keys(TEST_PASSWORD)
+        self.browser.find_element_by_xpath("//*[@type='submit']").click()
+
+        self.assertEqual(self.browser.current_url, 'http://localhost:8000/edit_home/')
 
 
 if __name__ == '__main__':
