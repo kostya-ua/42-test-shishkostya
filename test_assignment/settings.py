@@ -170,3 +170,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/edit_home/'

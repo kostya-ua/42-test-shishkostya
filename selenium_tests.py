@@ -66,27 +66,26 @@ class NewVisitorTest(unittest.TestCase):
 
         self.authorize()
 
-        for key, value in TEST_DATA:
-            self.browser.find_element_by_id('id_%s' % key).send_keys(value)
+        for key, value in TEST_DATA.iteritems():
+            element = self.browser.find_element_by_id('id_%s' % key)
+            element.clear()
+            element.send_keys(value)
 
-        self.browser.find_element_by_id('id_surname').send_keys(TEST_PASSWORD)
         self.browser.find_element_by_xpath("//*[@type='submit']").click()
-
-        self.assertEqual(self.browser.current_url, 'http://localhost:8000/')
 
         left = self.browser.find_element_by_class_name('left').text
 
-        self.assertIn(TEST_DATA['id_name'], left)
-        self.assertIn(TEST_DATA['id_surname'], left)
-        self.assertIn(TEST_DATA['id_bithdate'], left)
-        self.assertIn(TEST_DATA['id_bio'], left)
+        self.assertIn(TEST_DATA['name'], left)
+        self.assertIn(TEST_DATA['surname'], left)
+        self.assertIn('July 2, 1987', left)
+        self.assertIn(TEST_DATA['bio'], left)
 
         right = self.browser.find_element_by_class_name('right').text
 
-        self.assertIn(TEST_DATA['id_email'], right)
-        self.assertIn(TEST_DATA['id_skype'], right)
-        self.assertIn(TEST_DATA['id_jabber'], right)
-        self.assertIn(TEST_DATA['id_other_contacts'], right)
+        self.assertIn(TEST_DATA['email'], right)
+        self.assertIn(TEST_DATA['skype'], right)
+        self.assertIn(TEST_DATA['jabber'], right)
+        self.assertIn(TEST_DATA['other_contacts'], right)
 
 
 if __name__ == '__main__':

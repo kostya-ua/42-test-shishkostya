@@ -2,7 +2,7 @@ body {
     background-color: rgb(238, 238, 238);
 }
 
-#main {
+.main {
     background-color: rgb(255, 255, 255);
     width: 800px;
     height: 1070px;
@@ -17,6 +17,7 @@ h3{
     padding-left: 25px;
     font-size: 22px;
     font-weight: normal;
+    display: inline-block;
 }
 
 .left {
@@ -41,4 +42,25 @@ h3{
 
 table {
     padding-left: 25px;
+}
+
+label.field {
+    text-align: right;
+    width: 110px;
+    float: left;
+}
+
+.edit_form p input{
+    background-color: rgb(245, 240, 245);
+    width: 200px;
+    height: 16px;
+}
+
+.edit_form textarea{
+    background-color: rgb(245, 240, 245);
+}
+
+.nav {
+    float: right;
+    margin: 25px;
 }
