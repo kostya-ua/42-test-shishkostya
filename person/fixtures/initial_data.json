@@ -1,5 +1,21 @@
 [
   {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2013-11-25 18:34:30",
+      "password": "pbkdf2_sha256$10000$GoZLAJ2PfQ4a$QgLOModEm/nUkEwORLP0JqEiNtg4Uxgbs6uS1pToLFo=",
+      "email": "admin@mail.com",
+      "date_joined": "2013-11-21 17:08:13"
+    }
+  },
+  {
     "model": "person.person",
     "pk": 1,
     "fields": {
