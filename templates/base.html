@@ -2,11 +2,15 @@
 <html>
     <head>
         <title>42 Coffee Cups Test Assignment</title>
-        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}style.css" />
+
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        {% block head %} {% endblock %}
     </head>
 
     <body>
-        <div id="main">
+        <div class="main">
             {% block content %}{% endblock %}
         </div>
     </body>

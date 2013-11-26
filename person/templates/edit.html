@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head %}
+<script src="{% static 'js/edit.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+    <h3>42 Coffee Cups Test Assignment</h3>
+
+    <form class="edit_form" enctype="multipart/form-data" action="/edit_home/" method="post">
+    {% csrf_token %}
+
+        <div class="left">
+            <p>{{ form.name.errors }}</p>
+            <p><label class="field">Name: </label>{{ form.name }}</p>
+
+            <p>{{ form.surname.errors }}</p>
+            <p><label class="field">Last name:</label>{{ form.surname }}</p>
+
+            <p>{{ form.bithdate.errors }}</p>
+            <p><label class="field">Date of bith:</label>{{ form.bithdate }}</p>
+
+            <label class="field">Photo:</label>
+
+            <div class="photo_input">
+            <p>{{ form.photo.errors }}</p>
+            <p>{{ form.photo }}</p>
+
+            <img class="preview" width="200"/>
+            </div>
+
+
+        </div>
+
+        <div class="right">
+            <p>{{ form.email.errors }}</p>
+            <p><label class="field">Email: </label>{{ form.email }}</p>
+            <p>{{ form.jabber.errors }}</p>
+            <p><label class="field">Jabber: </label>{{ form.jabber }}</p>
+            <p>{{ form.skype.errors }}</p>
+            <p><label class="field">Skype: </label>{{ form.skype }}</p>
+
+            <br>
+            <p>{{ form.other_contacts.errors }}</p>
+            <p><label class="field">Other contacts: </label></p>
+            <p>{{ form.other_contacts }}</p>
+
+            <p>{{ form.bio.errors }}</p>
+            <p><label class="field">Bio: </label></p>
+            <p>{{ form.bio }}</p>
+
+
+        </div>
+    <div style="clear:both;">
+        <br>
+        <input type="submit" value="Save" />
+        <a href="/">Cancel</a>
+    </div>
+
+
+    </form>
+
+</div>
+
+
+<div style="clear:both;">
+    <hr >
+    <a href="/requests/">requests</a>
+</div>
+
+{% endblock %}
