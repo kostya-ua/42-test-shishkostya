@@ -3,12 +3,15 @@ from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
+from utils.helpers import db_table_exists
 
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        db.delete_table(u'utils_request')
+        if db_table_exists(u'utils_request'):
+            db.delete_table(u'utils_request')
+
         # Adding model 'Request'
         db.create_table(u'utils_request', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
