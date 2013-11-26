@@ -27,4 +27,3 @@ class EditMainPageView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return Person.objects.get(pk=1)
-

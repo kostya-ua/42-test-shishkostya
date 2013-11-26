@@ -19,6 +19,11 @@
             {% if person.bio %}
                 <div>Bio: {{ person.bio }}</div>
             {% endif %}
+
+            {% if person.photo %}
+               <img src="{{ person.photo.url }}" width="300"  />
+
+            {% endif %}
         </div>
 
         <div class="right">

@@ -64,3 +64,11 @@ label.field {
     float: right;
     margin: 25px;
 }
+
+.photo_input {
+    width: 200px;
+}
+
+.photo_input p input{
+    height: 24px;
+}

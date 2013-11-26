@@ -1,10 +1,14 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+{% block head %}
+<script src="{% static 'js/edit.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div>
     <h3>42 Coffee Cups Test Assignment</h3>
 
-    <form class="edit_form" action="/edit_home/" method="post">
+    <form class="edit_form" enctype="multipart/form-data" action="/edit_home/" method="post">
     {% csrf_token %}
 
         <div class="left">
@@ -16,6 +20,15 @@
 
             <p>{{ form.bithdate.errors }}</p>
             <p><label class="field">Date of bith:</label>{{ form.bithdate }}</p>
+
+            <label class="field">Photo:</label>
+
+            <div class="photo_input">
+            <p>{{ form.photo.errors }}</p>
+            <p>{{ form.photo }}</p>
+
+            <img class="preview" width="200"/>
+            </div>
 
 
         </div>
