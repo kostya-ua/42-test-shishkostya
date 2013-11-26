@@ -8,6 +8,7 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        db.delete_table(u'utils_request')
         # Adding model 'Request'
         db.create_table(u'utils_request', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
