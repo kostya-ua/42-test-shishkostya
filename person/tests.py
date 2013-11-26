@@ -31,3 +31,4 @@ class PersonTest(TestCase):
         self.assertEqual(Person.objects.all().count(), 1)
         new_item = Person.objects.all()[0]
         self.assertEqual(new_item.name, 'Bill')
+#test
