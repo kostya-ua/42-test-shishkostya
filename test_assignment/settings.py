@@ -99,7 +99,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'utils.middleware.RequestMiddleware',
 )
 
 ROOT_URLCONF = 'test_assignment.urls'
@@ -126,7 +125,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'person',
-    'utils',
     'south',
 )
 
@@ -158,13 +156,3 @@ LOGGING = {
         },
     }
 }
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.contrib.messages.context_processors.messages',
-    'utils.context_processors.add_settings_to_context',
-)

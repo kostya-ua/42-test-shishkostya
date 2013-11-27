@@ -9,7 +9,7 @@
             <div>{{ person.bithdate }}</div>
             <br>
             {% if person.bio %}
-                <div id="bio">Bio: {{ person.bio }}</div>
+                <div>Bio: {{ person.bio }}</div>
             {% endif %}
         </div>
 
@@ -23,11 +23,5 @@
                 <div>Other contacts: {{ person.other_contacts }}</div>
             {% endif %}
         </div>
-        </div>
-
-        <div style="clear:both;">
-        <hr >
-
-        <a href="/requests/">requests</a>
     </div>
 {% endblock %}

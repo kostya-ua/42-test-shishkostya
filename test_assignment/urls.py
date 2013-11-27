@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from person.views import MainPageView
-from utils.views import RequestsView
 
 
 # Uncomment the next two lines to enable the admin:
@@ -9,8 +8,7 @@ from utils.views import RequestsView
 
 urlpatterns = patterns('',
     # Examples:
-     url(r'^$', MainPageView.as_view()),
-     url(r'^requests/$', RequestsView.as_view()),
+     url(r'^$', MainPageView.as_view(), name='main'),
     # url(r'^test_assignment/', include('test_assignment.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
