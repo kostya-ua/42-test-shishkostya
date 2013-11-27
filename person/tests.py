@@ -24,3 +24,15 @@ class PersonTest(TestCase):
         self.assertEqual(Person.objects.all().count(), 1)
         new_item = Person.objects.all()[0]
         self.assertEqual(new_item.name, 'Bill')
+
+
+class CalendarWidgetTest(TestCase):
+    def test_widget_showing(self):
+        self.client.login(username='admin', password='admin')
+        response = self.client.get(reverse('edit_home'))
+
+        self.assertContains(response, '<input id="id_bithdate" type="text" class="datepicker"')
+        self.assertContains(response, 'http://code.jquery.com/jquery-1.9.1.js')
+        self.assertContains(response, 'http://code.jquery.com/ui/1.10.3/jquery-ui.js')
+        self.assertContains(response, 'js/calendar.js')
+        self.assertContains(response, 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
