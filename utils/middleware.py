@@ -1,4 +1,4 @@
-from requests.models import Request
+from utils.models import Request
 
 
 class RequestMiddleware(object):
