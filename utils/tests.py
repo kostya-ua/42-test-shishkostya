@@ -20,6 +20,6 @@ class UtilsTest(TestCase):
         self.assertEqual(len(context['requests_list']), 10)
 
     def test_context_processor(self):
-        response = self.client.get('/requests/')
+        response = self.client.get(reverse('request_list'))
         self.assertIn('SETTINGS', response.context)
         self.assertEqual(response.context['SETTINGS'], settings)
