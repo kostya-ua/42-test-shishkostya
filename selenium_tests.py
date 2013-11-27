@@ -42,7 +42,7 @@ class NewVisitorTest(unittest.TestCase):
 
         self.browser.get('http://localhost:8000/requests/')
 
-        table = self.browser.find_element_by_id('requests_table')
+        table = self.browser.find_element_by_class_name('requests_table')
         rows = table.find_elements_by_tag_name('tr')
 
         self.assertIn('/requests/', rows[1].text)

@@ -11,11 +11,11 @@ from utils.views import RequestsView
 
 urlpatterns = patterns('',
     # Examples:
-     url(r'^$', MainPageView.as_view()),
-     url(r'^requests/$', RequestsView.as_view()),
-     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-     url(r'^edit_home/$', EditMainPageView.as_view()),
+     url(r'^$', MainPageView.as_view(), name='main'),
+     url(r'^requests/$', RequestsView.as_view(), name='request_list'),
+     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login'),
+     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
+     url(r'^edit_home/$', EditMainPageView.as_view(), name='edit_home'),
     # url(r'^test_assignment/', include('test_assignment.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
