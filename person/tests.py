@@ -1,3 +1,4 @@
+import json
 from django.test import TestCase
 from django.utils import formats
 from django.core.urlresolvers import reverse
@@ -19,7 +20,8 @@ class PersonTest(TestCase):
 
     def test_save_main_page_data(self):
         self.client.login(username='admin', password='admin')
-        response = self.client.post(reverse('edit_home'), {'name': 'Bill', 'bithdate': '1991-01-09'})
+
+        response = self.client.post(reverse('edit_home'), {'name': 'Bill', 'bithdate': '1991-01-09'}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertEqual(Person.objects.all().count(), 1)
         new_item = Person.objects.all()[0]

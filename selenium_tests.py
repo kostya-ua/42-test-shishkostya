@@ -1,13 +1,21 @@
 from selenium import webdriver
 import unittest
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 TEST_USER = 'admin'
 TEST_PASSWORD = 'admin'
-TEST_DATA = {'name': 'John', 'surname': 'Smith', 'bithdate': '1987-07-02',
+TEST_DATA = {'name': 'John', 'surname': 'Smith', 'bithdate': '07/02/1987',
              'bio': 'I was born on 7 July 1987', 'email': 'john@mail.com', 'skype': 'john.smith',
              'jabber': 'johnsmith', 'other_contacts': 'Phone: 1234567'}
 
+
+def ajax_complete(driver):
+    try:
+        return 0 == driver.execute_script("return jQuery.active")
+    except WebDriverException:
+        pass
 
 
 class NewVisitorTest(unittest.TestCase):
@@ -17,7 +25,8 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
-        self.browser.quit()
+        #self.browser.quit()
+        pass
 
     def test_loading_main_page(self):
 
@@ -72,6 +81,13 @@ class NewVisitorTest(unittest.TestCase):
             element.send_keys(value)
 
         self.browser.find_element_by_xpath("//*[@type='submit']").click()
+
+        WebDriverWait(self.browser, 10).until(ajax_complete)
+
+        output = self.browser.find_element_by_class_name('output').text
+        self.assertIn("Form saved successful.", output)
+
+        self.browser.get('http://localhost:8000')
 
         left = self.browser.find_element_by_class_name('left').text
 
