@@ -1,8 +1,14 @@
 from django.test import TestCase
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.template import Template, Context
+from django.contrib.auth.models import User
 from utils.models import Request
 from utils.views import RequestsView
+
+
+def render_template(template, **kwargs):
+    return Template(template).render(Context(**kwargs))
 
 
 class UtilsTest(TestCase):
@@ -23,3 +29,13 @@ class UtilsTest(TestCase):
         response = self.client.get(reverse('request_list'))
         self.assertIn('SETTINGS', response.context)
         self.assertEqual(response.context['SETTINGS'], settings)
+
+    def test_edit_link_tag(self):
+        user = User.objects.get(pk=1)
+        rendered = render_template(
+            '{% load admin_edit %}'
+            '{% edit_link user %}', dict_={'user': user})
+
+        change_link = reverse('admin:auth_user_change', args=(user.pk,))
+
+        self.assertEqual(rendered, '<a href="%s">(admin)</a>' % change_link)
