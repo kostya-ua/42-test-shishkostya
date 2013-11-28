@@ -72,3 +72,16 @@ label.field {
 .photo_input p input{
     height: 24px;
 }
+
+.output {
+    padding-left: 25px;
+}
+
+.loader {
+    display: none;
+    padding-left: 25px;
+}
+
+.error {
+    color: rgb(255, 72,72);
+}

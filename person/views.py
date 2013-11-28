@@ -1,4 +1,7 @@
+import json
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, UpdateView
 from person.models import Person
@@ -23,7 +26,23 @@ class LoginRequiredMixin(object):
 class EditMainPageView(LoginRequiredMixin, UpdateView):
     template_name = "edit.html"
     form_class = PersonForm
-    success_url = '/'
+
+    def get_success_url(self):
+        return reverse('main')
 
     def get_object(self, queryset=None):
         return Person.objects.get(pk=1)
+
+    def form_valid(self, form):
+        if self.request.is_ajax():
+            self.object = form.save()
+
+            return HttpResponse(json.dumps("Form saved successful."), mimetype="application/json")
+
+        return super(EditMainPageView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        if self.request.is_ajax():
+            return HttpResponse(json.dumps({'errors': form.errors}), mimetype="application/json")
+
+        return super(EditMainPageView, self).form_invalid(form)

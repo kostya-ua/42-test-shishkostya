@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 TEST_USER = 'admin'
 TEST_PASSWORD = 'admin'
-TEST_DATA = {'name': 'John', 'surname': 'Smith', 'bithdate': '07/02/1987',
+TEST_DATA = {'name': 'John', 'surname': 'Smith', 'bithdate': '07-02-1987',
              'bio': 'I was born on 7 July 1987', 'email': 'john@mail.com', 'skype': 'john.smith',
              'jabber': 'johnsmith', 'other_contacts': 'Phone: 1234567'}
 
