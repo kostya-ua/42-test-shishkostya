@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+import json
 from django.test import TestCase
 from django.utils import formats
 from django.core.urlresolvers import reverse
@@ -20,8 +20,22 @@ class PersonTest(TestCase):
 
     def test_save_main_page_data(self):
         self.client.login(username='admin', password='admin')
-        response = self.client.post(reverse('edit_home'), {'name': 'Bill', 'bithdate': '1991-01-09'})
+
+        response = self.client.post(reverse('edit_home'), {'name': 'Bill', 'bithdate': '1991-01-09'}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertEqual(Person.objects.all().count(), 1)
         new_item = Person.objects.all()[0]
         self.assertEqual(new_item.name, 'Bill')
+
+
+class CalendarWidgetTest(TestCase):
+    def test_widget_showing(self):
+        self.client.login(username='admin', password='admin')
+        response = self.client.get(reverse('edit_home'))
+
+        self.assertContains(response, '<input id="id_bithdate" type="text" class="datepicker"')
+        self.assertContains(response, 'http://code.jquery.com/jquery-1.9.1.js')
+        self.assertContains(response, 'http://code.jquery.com/ui/1.10.3/jquery-ui.js')
+        self.assertContains(response, 'js/calendar.js')
+        self.assertContains(response, 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
+

@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block head %}
+{{ form.media }}
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="{% static 'js/edit.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
 <div>
     <h3>42 Coffee Cups Test Assignment</h3>
+    <div class="output"></div>
+    <div class="loader"><img src="{% static 'img/loader.gif' %}"/></div>
 
-    <form class="edit_form" enctype="multipart/form-data" action="{% url edit_home %}" method="post">
+    <form  class="edit_form" enctype="multipart/form-data" action="{% url edit_home %}" method="post">
+
     {% csrf_token %}
 
         <div class="left">
