@@ -42,6 +42,7 @@ class EditMainPageView(LoginRequiredMixin, UpdateView):
         return super(EditMainPageView, self).form_valid(form)
 
     def form_invalid(self, form):
+        print form.errors
         if self.request.is_ajax():
             return HttpResponse(json.dumps({'errors': form.errors}), mimetype="application/json")
 

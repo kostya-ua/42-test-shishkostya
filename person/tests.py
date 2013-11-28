@@ -21,11 +21,13 @@ class PersonTest(TestCase):
     def test_save_main_page_data(self):
         self.client.login(username='admin', password='admin')
 
-        response = self.client.post(reverse('edit_home'), {'name': 'Bill', 'bithdate': '1991-01-09'}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = self.client.post(reverse('edit_home'), {'name': 'Bill', 'bithdate': '1991-01-09',
+                                                           'email': 'bill@mail.com'},
+                                                            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertEqual(Person.objects.all().count(), 1)
-        new_item = Person.objects.all()[0]
-        self.assertEqual(new_item.name, 'Bill')
+        person = Person.objects.all()[0]
+        self.assertEqual(person.name, 'Bill')
 
 
 class CalendarWidgetTest(TestCase):
