@@ -25,8 +25,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
-        #self.browser.quit()
-        pass
+        self.browser.quit()
 
     def test_loading_main_page(self):
 
