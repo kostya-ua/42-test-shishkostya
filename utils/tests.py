@@ -34,7 +34,7 @@ class UtilsTest(TestCase):
         user = User.objects.get(pk=1)
         rendered = render_template(
             '{% load admin_edit %}'
-            '{% edit_link request.user %}', user=user)
+            '{% edit_link user %}', dict_={'user': user})
 
         change_link = reverse('admin:auth_user_change', args=(user.pk,))
 
