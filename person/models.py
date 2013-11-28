@@ -6,7 +6,7 @@ class Person(models.Model):
     surname = models.CharField(max_length=20, blank=True)
     bithdate = models.DateField()
     bio = models.TextField(blank=True)
-    email = models.CharField(max_length=40, blank=True)
+    email = models.EmailField()
     skype = models.CharField(max_length=20, blank=True)
     jabber = models.CharField(max_length=40, blank=True)
     other_contacts = models.TextField(blank=True)
