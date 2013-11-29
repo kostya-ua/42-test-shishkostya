@@ -40,28 +40,24 @@ class UtilsTest(TestCase):
 
         self.assertEqual(rendered, '<a href="%s">(admin)</a>' % change_link)
 
-    def test_models_log_object(self):
+    def check_log(self, count, action, model, instance):
+        self.assertEqual(ModelsLog.objects.all().count(), count)
+
+        log_entry = ModelsLog.objects.latest('id')
+        self.assertEqual(log_entry.action, action)
+        self.assertEqual(log_entry.model, model)
+        self.assertEqual(log_entry.instance, unicode(instance))
+
+    def test_models_log(self):
+        count_before = ModelsLog.objects.all().count()
+        model = Request._meta.object_name
         request = Request.objects.create(path='test')
 
-        self.assertEqual(ModelsLog.objects.all().count(), 1)
-
-        log_entry = ModelsLog.objects.get(pk=1)
-        self.assertEqual(log_entry.action, ACTION_CREATE)
-        self.assertEqual(log_entry.model, Request._meta.object_name)
+        self.check_log(count_before + 1, ACTION_CREATE, model, request)
 
         request.path = 'test2'
         request.save()
-
-        self.assertEqual(ModelsLog.objects.all().count(), 2)
-
-        log_entry = ModelsLog.objects.get(pk=2)
-        self.assertEqual(log_entry.action, ACTION_UPDATE)
-        self.assertEqual(log_entry.model, Request._meta.object_name)
+        self.check_log(count_before + 2, ACTION_UPDATE, model, request)
 
         request.delete()
-
-        self.assertEqual(ModelsLog.objects.all().count(), 3)
-
-        log_entry = ModelsLog.objects.get(pk=3)
-        self.assertEqual(log_entry.action, ACTION_DELETE)
-        self.assertEqual(log_entry.model, Request._meta.object_name)
+        self.check_log(count_before + 3, ACTION_DELETE, model, request)

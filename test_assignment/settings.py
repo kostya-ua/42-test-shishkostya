@@ -176,3 +176,5 @@ LOGIN_REDIRECT_URL = '/edit_home/'
 FIXTURE_DIRS = (
     os.path.join(PROJECT_ROOT, 'fixtures'),
 )
+
+SOUTH_TESTS_MIGRATE = False

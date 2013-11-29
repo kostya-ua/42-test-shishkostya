@@ -11,3 +11,6 @@ class Person(models.Model):
     jabber = models.CharField(max_length=40, blank=True)
     other_contacts = models.TextField(blank=True)
     photo = models.ImageField(upload_to='photos/', blank=True)
+
+    def __unicode__(self):
+        return u'%s %s %s %s' % (self.name, self.surname, self.bithdate, self.email)
