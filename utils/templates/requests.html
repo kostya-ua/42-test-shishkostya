@@ -2,16 +2,22 @@
 
 {% block content %}
     <h3>Last 10 requests</h3>
+    <div class="nav">
+        <a href="{% url admin:utils_path_changelist %}">Edit priority</a>
+    </div>
+
     <table class="requests_table">
         <tr>
+            <th>Priority</th>
             <th>Date</th>
             <th>Path</th>
             <th>Method</th>
         </tr>
         {% for request in requests_list %}
             <tr>
+                <td>{{ request.path.priority }}</td>
                 <td>{{ request.date }}</td>
-                <td>{{ request.path }}</td>
+                <td>{{ request.path.url }}</td>
                 <td>{{ request.method }}</td>
             </tr>
         {% endfor %}

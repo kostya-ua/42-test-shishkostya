@@ -12,34 +12,6 @@ def render_template(template, **kwargs):
 
 
 class UtilsTest(TestCase):
-    def test_requests_view(self):
-        response = self.client.get(reverse('request_list'))
-        self.assertContains(response, reverse('request_list'))
-
-    def test_view_only_ten(self):
-        for i in range(11):
-            path = Path.objects.create(url='/test%d' % 1)
-            Request.objects.create(path=path)
-
-        view = RequestsView()
-        context = view.get_context_data()
-
-        self.assertEqual(len(context['requests_list']), 10)
-
-    def test_ordering(self):
-        p1 = Path.objects.create(url='/test%d' % 1)
-        p2 = Path.objects.create(url='/test%d' % 2)
-        p3 = Path.objects.create(url='/test%d' % 3)
-
-        for path in (p1, p2, p3)*2:
-            Request.objects.create(path=path)
-
-        view = RequestsView()
-        context = view.get_context_data()
-
-        path_list = [request.path.url for request in context['requests_list']]
-        self.assertEqual(path_list, ['/test%d' % (d/2) for d in range(9, 1, -1)])
-
     def test_context_processor(self):
         response = self.client.get(reverse('request_list'))
         self.assertIn('SETTINGS', response.context)
@@ -76,3 +48,33 @@ class UtilsTest(TestCase):
 
         path.delete()
         self.check_log(count_before + 3, ACTION_DELETE, model, path)
+
+
+class RequestsTest(TestCase):
+    def test_view(self):
+        response = self.client.get(reverse('request_list'))
+        self.assertContains(response, reverse('request_list'))
+
+    def test_view_only_ten(self):
+        for i in range(11):
+            path = Path.objects.get_or_create(url='/test%d' % 1)[0]
+            Request.objects.create(path=path)
+
+        view = RequestsView()
+        context = view.get_context_data()
+
+        self.assertEqual(len(context['requests_list']), 10)
+
+    def test_ordering(self):
+        p1 = Path.objects.create(url='/test%d' % 1, priority=1)
+        p2 = Path.objects.create(url='/test%d' % 2, priority=2)
+        p3 = Path.objects.create(url='/test%d' % 3, priority=3)
+
+        for path in (p1, p2, p3)*2:
+            Request.objects.create(path=path)
+
+        view = RequestsView()
+        context = view.get_context_data()
+
+        path_list = [request.path.url for request in context['requests_list']]
+        self.assertEqual(path_list, ['/test%d' % (d/2) for d in range(7, 1, -1)])
