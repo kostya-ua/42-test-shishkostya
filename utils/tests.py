@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.contrib.auth.models import User
+from utils.management.commands.print_models import count_models
 from utils.models import Request
 from utils.views import RequestsView
 
@@ -39,3 +40,15 @@ class UtilsTest(TestCase):
         change_link = reverse('admin:auth_user_change', args=(user.pk,))
 
         self.assertEqual(rendered, '<a href="%s">(admin)</a>' % change_link)
+
+    def test_count_models(self):
+        count_before = User.objects.all().count()
+
+        for i in range(5):
+            User.objects.create(username='name%d' % i)
+
+        for module, name, count in count_models():
+            if name == "User":
+                user_count = count
+
+        self.assertEqual(user_count, count_before + 5)
