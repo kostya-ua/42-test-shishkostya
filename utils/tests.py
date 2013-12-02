@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.contrib.auth.models import User
-from utils.models import Request, ModelsLog, ACTION_CREATE,  ACTION_UPDATE, ACTION_DELETE
+from utils.models import Request, Path, ModelsLog, ACTION_CREATE,  ACTION_UPDATE, ACTION_DELETE
 from utils.views import RequestsView
 
 
@@ -18,12 +18,27 @@ class UtilsTest(TestCase):
 
     def test_view_only_ten(self):
         for i in range(11):
-            Request.objects.create(path='/test%d' % 1)
+            path = Path.objects.create(url='/test%d' % 1)
+            Request.objects.create(path=path)
 
         view = RequestsView()
         context = view.get_context_data()
 
         self.assertEqual(len(context['requests_list']), 10)
+
+    def test_ordering(self):
+        p1 = Path.objects.create(url='/test%d' % 1)
+        p2 = Path.objects.create(url='/test%d' % 2)
+        p3 = Path.objects.create(url='/test%d' % 3)
+
+        for path in (p1, p2, p3)*2:
+            Request.objects.create(path=path)
+
+        view = RequestsView()
+        context = view.get_context_data()
+
+        path_list = [request.path.url for request in context['requests_list']]
+        self.assertEqual(path_list, ['/test%d' % (d/2) for d in range(9, 1, -1)])
 
     def test_context_processor(self):
         response = self.client.get(reverse('request_list'))
@@ -50,14 +65,14 @@ class UtilsTest(TestCase):
 
     def test_models_log(self):
         count_before = ModelsLog.objects.all().count()
-        model = Request._meta.object_name
-        request = Request.objects.create(path='test')
+        model = Path._meta.object_name
+        path = Path.objects.create(url='test')
 
-        self.check_log(count_before + 1, ACTION_CREATE, model, request)
+        self.check_log(count_before + 1, ACTION_CREATE, model, path)
 
-        request.path = 'test2'
-        request.save()
-        self.check_log(count_before + 2, ACTION_UPDATE, model, request)
+        path.url = 'test2'
+        path.save()
+        self.check_log(count_before + 2, ACTION_UPDATE, model, path)
 
-        request.delete()
-        self.check_log(count_before + 3, ACTION_DELETE, model, request)
+        path.delete()
+        self.check_log(count_before + 3, ACTION_DELETE, model, path)
