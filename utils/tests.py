@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.contrib.auth.models import User
 from utils.models import Request, ModelsLog, ACTION_CREATE,  ACTION_UPDATE, ACTION_DELETE
+from utils.management.commands.print_models import count_models
 from utils.views import RequestsView
 
 
@@ -61,3 +62,15 @@ class UtilsTest(TestCase):
 
         request.delete()
         self.check_log(count_before + 3, ACTION_DELETE, model, request)
+
+    def test_count_models(self):
+        count_before = User.objects.all().count()
+
+        for i in range(5):
+            User.objects.create(username='name%d' % i)
+
+        for module, name, count in count_models():
+            if name == "User":
+                user_count = count
+
+        self.assertEqual(user_count, count_before + 5)
