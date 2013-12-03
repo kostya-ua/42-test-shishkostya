@@ -7,6 +7,7 @@ class RequestsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(RequestsView, self).get_context_data(**kwargs)
-        context["requests_list"] = Request.objects.all().order_by("-date")[:10]
-        
+        last_ten = Request.objects.all()[:10]
+        context["requests_list"] = sorted(last_ten, key=lambda o: -o.path.priority)
+
         return context
